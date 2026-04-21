@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prepare To Dye — Tie-Dye & Custom Crafts</title>
+<link href="https://fonts.googleapis.com/css2?family=Boogaloo&family=Pacifico&family=Nunito:wght@400;600;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --red: #ff2d55;
+    --orange: #ff6b00;
+    --yellow: #ffd600;
+    --green: #00c851;
+    --teal: #00bcd4;
+    --blue: #2979ff;
+    --purple: #9c27b0;
+    --pink: #e91e8c;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ── */
+  .cursor {
+    position: fixed;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    mix-blend-mode: difference;
+    transition: transform 0.15s ease;
+    background: conic-gradient(#ff2d55, #ff6b00, #ffd600, #00c851, #2979ff, #9c27b0, #ff2d55);
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,255,255,0.4);
+    pointer-events: none;
+    z-index: 9998;
+    transform: translate(-50%, -50%);
+    transition: transform 0.08s ease, width 0.2s, height 0.2s;
+  }
+
+  /* ── NOISE OVERLAY ── */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9990;
+    opacity: 0.35;
+  }
+
+  /* ── HERO ── */
+  #hero {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 80% at 20% 20%, rgba(255,45,85,0.7) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 10%, rgba(255,107,0,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 70% at 70% 70%, rgba(41,121,255,0.7) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 10% 80%, rgba(0,200,81,0.6) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 80% at 50% 50%, rgba(156,39,176,0.5) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 90% 50%, rgba(255,214,0,0.5) 0%, transparent 50%);
+    animation: heroSwirl 8s ease-in-out infinite alternate;
+    filter: blur(30px) saturate(1.5);
+  }
+
+  @keyframes heroSwirl {
+    0%   { transform: scale(1) rotate(0deg); filter: blur(30px) saturate(1.5) hue-rotate(0deg); }
+    50%  { transform: scale(1.1) rotate(3deg); filter: blur(25px) saturate(2) hue-rotate(30deg); }
+    100% { transform: scale(1.05) rotate(-2deg); filter: blur(35px) saturate(1.8) hue-rotate(60deg); }
+  }
+
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-conic-gradient(
+      rgba(255,255,255,0.03) 0deg 10deg,
+      transparent 10deg 20deg
+    );
+    animation: spinRing 20s linear infinite;
+  }
+
+  @keyframes spinRing { to { transform: rotate(360deg); } }
+
+  .hero-logo-ring {
+    position: relative;
+    z-index: 2;
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    padding: 6px;
+    background: conic-gradient(#ff2d55, #ff6b00, #ffd600, #00c851, #00bcd4, #2979ff, #9c27b0, #e91e8c, #ff2d55);
+    animation: spinRing 4s linear infinite;
+    margin-bottom: 2rem;
+    box-shadow: 0 0 60px rgba(255,107,0,0.6), 0 0 120px rgba(156,39,176,0.4);
+  }
+
+  .hero-logo-inner {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 1rem;
+    text-align: center;
+    line-height: 1.2;
+    padding: 1rem;
+    background: radial-gradient(circle, #1a0a2e, #0a0a0a);
+    color: #fff;
+    letter-spacing: 0.02em;
+  }
+
+  .hero-title {
+    position: relative;
+    z-index: 2;
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(3.5rem, 10vw, 8rem);
+    line-height: 1;
+    text-align: center;
+    background: conic-gradient(at 50% 50%, #ff2d55 0%, #ff6b00 15%, #ffd600 30%, #00c851 45%, #00bcd4 55%, #2979ff 65%, #9c27b0 78%, #e91e8c 90%, #ff2d55 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 30px rgba(255,107,0,0.5));
+    animation: titlePulse 3s ease-in-out infinite;
+  }
+
+  @keyframes titlePulse {
+    0%, 100% { filter: drop-shadow(0 0 20px rgba(255,45,85,0.6)); }
+    50% { filter: drop-shadow(0 0 50px rgba(41,121,255,0.8)); }
+  }
+
+  .hero-sub {
+    position: relative;
+    z-index: 2;
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    font-weight: 800;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 1rem;
+    text-shadow: 0 0 20px rgba(255,255,255,0.3);
+  }
+
+  .hero-location {
+    position: relative;
+    z-index: 2;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    animation: fadeUpDown 2s ease-in-out infinite;
+  }
+  .scroll-hint .arrow { font-size: 1.5rem; }
+  @keyframes fadeUpDown {
+    0%, 100% { opacity: 0.4; transform: translateX(-50%) translateY(0); }
+    50% { opacity: 1; transform: translateX(-50%) translateY(8px); }
+  }
+
+  /* ── SCROLL RIVER ── */
+  .scroll-river {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* ── SECTION BASE ── */
+  .section {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6rem 2rem;
+    overflow: hidden;
+  }
+
+  .section-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+    width: 100%;
+    text-align: center;
+  }
+
+  /* ── LIQUID BG SECTIONS ── */
+  .sec-what { background: #050510; }
+  .sec-what .liquid {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 100% 80% at 0% 50%, rgba(255,45,85,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 60% at 100% 50%, rgba(255,214,0,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse 60% 100% at 50% 100%, rgba(156,39,176,0.2) 0%, transparent 60%);
+    animation: liquidFlow 10s ease-in-out infinite alternate;
+    filter: blur(40px);
+  }
+
+  .sec-process { background: #030d08; }
+  .sec-process .liquid {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 80% at 20% 30%, rgba(0,200,81,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 80% 70%, rgba(0,188,212,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 70% 50% at 50% 10%, rgba(41,121,255,0.2) 0%, transparent 60%);
+    animation: liquidFlow2 12s ease-in-out infinite alternate;
+    filter: blur(40px);
+  }
+
+  .sec-products { background: #0d0510; }
+  .sec-products .liquid {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 90% 70% at 60% 20%, rgba(233,30,140,0.3) 0%, transparent 60%),
+      radial-gradient(ellipse 70% 80% at 10% 80%, rgba(41,121,255,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 60% at 90% 60%, rgba(255,107,0,0.2) 0%, transparent 60%);
+    animation: liquidFlow 9s ease-in-out infinite alternate;
+    filter: blur(40px);
+  }
+
+  .sec-order { background: #080510; }
+  .sec-order .liquid {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 120% 80% at 50% 50%, rgba(255,107,0,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 100% at 0% 0%, rgba(255,45,85,0.25) 0%, transparent 55%),
+      radial-gradient(ellipse 80% 70% at 100% 100%, rgba(255,214,0,0.2) 0%, transparent 60%);
+    animation: liquidFlow2 11s ease-in-out infinite alternate;
+    filter: blur(40px);
+  }
+
+  @keyframes liquidFlow {
+    0%   { transform: scale(1) translate(0,0); }
+    33%  { transform: scale(1.1) translate(3%,2%); }
+    66%  { transform: scale(0.95) translate(-2%, 4%); }
+    100% { transform: scale(1.05) translate(1%,-3%); }
+  }
+  @keyframes liquidFlow2 {
+    0%   { transform: scale(1.05) translate(2%,-2%); }
+    50%  { transform: scale(0.95) translate(-3%, 3%); }
+    100% { transform: scale(1.1) translate(1%, -1%); }
+  }
+
+  /* ── DIVIDERS: tie-dye wave ── */
+  .wave-divider {
+    position: relative;
+    height: 120px;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .wave-divider svg { position: absolute; width: 100%; height: 100%; }
+
+  /* ── SECTION LABELS ── */
+  .section-tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    font-weight: 900;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    padding: 0.35rem 1.2rem;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+  }
+
+  .section-title {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    margin-bottom: 1.5rem;
+  }
+
+  .grad-red    { background: linear-gradient(135deg, #ff2d55, #ff6b00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-green  { background: linear-gradient(135deg, #00c851, #00bcd4); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-purple { background: linear-gradient(135deg, #e91e8c, #9c27b0, #2979ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+  .grad-gold   { background: linear-gradient(135deg, #ffd600, #ff6b00); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+  .section-body {
+    font-size: clamp(1rem, 2vw, 1.2rem);
+    font-weight: 600;
+    line-height: 1.8;
+    color: rgba(255,255,255,0.75);
+    max-width: 680px;
+    margin: 0 auto 2.5rem;
+  }
+
+  /* ── CARDS GRID ── */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .card {
+    position: relative;
+    padding: 2rem 1.5rem;
+    border-radius: 20px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 30px 60px rgba(0,0,0,0.4);
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--card-grad, linear-gradient(135deg, rgba(255,45,85,0.15), transparent));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .card:hover::before { opacity: 1; }
+
+  .card-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+  .card-title { font-family: 'Boogaloo', cursive; font-size: 1.4rem; margin-bottom: 0.5rem; color: #fff; }
+  .card-desc { font-size: 0.9rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
+
+  /* ── STEPS ── */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1.5rem 1rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.03);
+    transition: transform 0.3s ease;
+    position: relative;
+  }
+  .step:hover { transform: translateY(-4px); }
+
+  .step-num {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Pacifico', cursive;
+    font-size: 1.2rem;
+    background: conic-gradient(#ff2d55, #ff6b00, #ffd600, #00c851, #2979ff, #9c27b0, #ff2d55);
+    animation: spinRing 5s linear infinite;
+  }
+  .step-title { font-family: 'Boogaloo', cursive; font-size: 1.1rem; color: #fff; }
+  .step-desc { font-size: 0.8rem; color: rgba(255,255,255,0.55); text-align: center; line-height: 1.5; }
+
+  /* ── MARQUEE BAND ── */
+  .marquee-band {
+    padding: 1.2rem 0;
+    background: conic-gradient(at 50% 50%, #ff2d55 0%, #ff6b00 14%, #ffd600 28%, #00c851 42%, #00bcd4 56%, #2979ff 70%, #9c27b0 84%, #ff2d55 100%);
+    overflow: hidden;
+    position: relative;
+    z-index: 3;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marqueeScroll 20s linear infinite;
+    gap: 0;
+  }
+  .marquee-item {
+    font-family: 'Boogaloo', cursive;
+    font-size: 1.3rem;
+    color: rgba(0,0,0,0.7);
+    padding: 0 2rem;
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+  .marquee-item span { color: rgba(0,0,0,0.4); margin: 0 1rem; }
+  @keyframes marqueeScroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ── CONTACT SECTION ── */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.2rem;
+    margin-top: 2.5rem;
+  }
+
+  .contact-pill {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border-radius: 100px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    backdrop-filter: blur(20px);
+    text-decoration: none;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .contact-pill:hover {
+    background: rgba(255,255,255,0.12);
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  }
+  .contact-pill .icon {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CTA BUTTON ── */
+  .cta-btn {
+    display: inline-block;
+    padding: 1rem 3rem;
+    border-radius: 100px;
+    font-family: 'Boogaloo', cursive;
+    font-size: 1.4rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    color: #000;
+    background: conic-gradient(at 50% 50%, #ff2d55 0%, #ff6b00 20%, #ffd600 40%, #00c851 55%, #2979ff 70%, #9c27b0 85%, #ff2d55 100%);
+    background-size: 200% 200%;
+    animation: btnGradient 3s linear infinite, btnPulse 2s ease-in-out infinite;
+    box-shadow: 0 10px 40px rgba(255,107,0,0.4);
+    transition: transform 0.2s ease;
+    margin-top: 1rem;
+  }
+  .cta-btn:hover { transform: scale(1.08); box-shadow: 0 15px 60px rgba(255,107,0,0.6); }
+  @keyframes btnGradient { to { filter: hue-rotate(360deg); } }
+  @keyframes btnPulse {
+    0%, 100% { box-shadow: 0 10px 40px rgba(255,107,0,0.4); }
+    50% { box-shadow: 0 10px 60px rgba(156,39,176,0.6); }
+  }
+
+  /* ── PAYMENT PILLS ── */
+  .payment-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .pay-pill {
+    padding: 0.5rem 1.2rem;
+    border-radius: 100px;
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.8);
+    transition: all 0.2s ease;
+  }
+  .pay-pill:hover {
+    background: rgba(255,255,255,0.15);
+    color: #fff;
+    transform: translateY(-2px);
+  }
+
+  /* ── SWIRLING ORB BG ELEMENTS ── */
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    opacity: 0.15;
+    animation: orbFloat 15s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes orbFloat {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    25%  { transform: translate(5%, 8%) scale(1.1); }
+    50%  { transform: translate(-3%, 5%) scale(0.9); }
+    75%  { transform: translate(7%, -4%) scale(1.05); }
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    background: #000;
+    border-top: 1px solid rgba(255,255,255,0.05);
+    position: relative;
+    z-index: 2;
+  }
+  footer .foot-logo {
+    font-family: 'Pacifico', cursive;
+    font-size: 2rem;
+    background: conic-gradient(#ff2d55, #ff6b00, #ffd600, #00c851, #2979ff, #9c27b0, #ff2d55);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: btnGradient 4s linear infinite;
+    margin-bottom: 0.5rem;
+  }
+  footer p { font-size: 0.8rem; color: rgba(255,255,255,0.3); letter-spacing: 0.15em; }
+
+  /* ── REVEAL ANIMATION ── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.3s ease, backdrop-filter 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(0,0,0,0.75);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .nav-brand {
+    font-family: 'Pacifico', cursive;
+    font-size: 1.3rem;
+    background: conic-gradient(#ff2d55, #ff6b00, #ffd600, #00c851, #2979ff, #9c27b0, #ff2d55);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: btnGradient 3s linear infinite;
+    text-decoration: none;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-size: 0.85rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .nav-links a:hover { color: #fff; }
+
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav id="nav">
+  <a href="#" class="nav-brand">Prepare To Dye</a>
+  <ul class="nav-links">
+    <li><a href="#what">About</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="#process">Process</a></li>
+    <li><a href="#order">Order</a></li>
+  </ul>
+</nav>
+
+<!-- ══════════════════════════════════════ HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  
+  <!-- floating orbs -->
+  <div class="orb" style="width:400px;height:400px;background:#ff2d55;top:-100px;left:-100px;animation-delay:0s;"></div>
+  <div class="orb" style="width:300px;height:300px;background:#ffd600;top:50%;right:-80px;animation-delay:-5s;"></div>
+  <div class="orb" style="width:500px;height:500px;background:#2979ff;bottom:-150px;left:30%;animation-delay:-8s;"></div>
+
+  <div class="hero-logo-ring">
+    <div class="hero-logo-inner">
+      PREPARE<br>TO<br>DYE
+    </div>
+  </div>
+
+  <h1 class="hero-title">Prepare To Dye</h1>
+  <p class="hero-sub">Tie-Dye & Custom Crafts</p>
+  <p class="hero-location">📍 Rainier, Oregon · Always Open</p>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <span class="arrow">↓</span>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ MARQUEE -->
+<div class="marquee-band">
+  <div class="marquee-track" id="marqueeTrack">
+    <div class="marquee-item">Shirts <span>✦</span> Hoodies <span>✦</span> Signs <span>✦</span> Custom Everything <span>✦</span> Hand-Dyed <span>✦</span> One of a Kind <span>✦</span> Rainier Oregon <span>✦</span></div>
+    <div class="marquee-item">Shirts <span>✦</span> Hoodies <span>✦</span> Signs <span>✦</span> Custom Everything <span>✦</span> Hand-Dyed <span>✦</span> One of a Kind <span>✦</span> Rainier Oregon <span>✦</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════ WHAT WE DO -->
+<section class="section sec-what" id="what">
+  <div class="liquid"></div>
+
+  <div class="section-inner">
+    <span class="section-tag reveal">✦ The Art</span>
+    <h2 class="section-title grad-red reveal reveal-delay-1">
+      Color is our<br>superpower
+    </h2>
+    <p class="section-body reveal reveal-delay-2">
+      At Prepare To Dye, every piece is handcrafted with love in Rainier, Oregon. 
+      From vibrant tie-dye shirts to custom signs, I pour color and creativity into 
+      everything I make. No two pieces are ever the same — that's the whole point.
+    </p>
+
+    <div class="cards">
+      <div class="card reveal reveal-delay-1" style="--card-grad: linear-gradient(135deg,rgba(255,45,85,0.2),transparent);">
+        <span class="card-emoji">👕</span>
+        <div class="card-title">Apparel</div>
+        <div class="card-desc">Shirts, hoodies, socks, and more — dyed by hand with wild, swirling patterns you'll never find in a store.</div>
+      </div>
+      <div class="card reveal reveal-delay-2" style="--card-grad: linear-gradient(135deg,rgba(255,214,0,0.2),transparent);">
+        <span class="card-emoji">🪧</span>
+        <div class="card-title">Custom Signs</div>
+        <div class="card-desc">Need something unique for your home, event, or business? I customize everything from wood signs to fabric banners.</div>
+      </div>
+      <div class="card reveal reveal-delay-3" style="--card-grad: linear-gradient(135deg,rgba(41,121,255,0.2),transparent);">
+        <span class="card-emoji">🎨</span>
+        <div class="card-title">One-of-a-Kind</div>
+        <div class="card-desc">Every single piece is unique. That swirl, that burst of color — it will never happen the exact same way twice.</div>
+      </div>
+      <div class="card reveal reveal-delay-4" style="--card-grad: linear-gradient(135deg,rgba(0,200,81,0.2),transparent);">
+        <span class="card-emoji">💌</span>
+        <div class="card-title">Custom Orders</div>
+        <div class="card-desc">Have something specific in mind? Hit me up! I love bringing your vision to life in full tie-dye glory.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wg1" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#ff2d55"/>
+        <stop offset="20%" stop-color="#ff6b00"/>
+        <stop offset="40%" stop-color="#ffd600"/>
+        <stop offset="60%" stop-color="#00c851"/>
+        <stop offset="80%" stop-color="#2979ff"/>
+        <stop offset="100%" stop-color="#9c27b0"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,40 C180,100 360,0 540,60 C720,120 900,20 1080,70 C1260,120 1350,30 1440,50 L1440,120 L0,120 Z" fill="url(#wg1)" opacity="0.3"/>
+    <path d="M0,70 C200,20 400,100 600,50 C800,0 1000,90 1200,40 C1300,15 1380,80 1440,60 L1440,120 L0,120 Z" fill="url(#wg1)" opacity="0.15"/>
+  </svg>
+</div>
+
+<!-- ══════════════════════════════════════ PRODUCTS -->
+<section class="section sec-products" id="products">
+  <div class="liquid"></div>
+
+  <div class="section-inner">
+    <span class="section-tag reveal">✦ What I Make</span>
+    <h2 class="section-title grad-purple reveal reveal-delay-1">
+      Fresh drops &<br>custom pieces
+    </h2>
+    <p class="section-body reveal reveal-delay-2">
+      Based in Rainier, OR and always open for business. Check my Facebook page for the latest 
+      creations — new pieces posted regularly. See something you love? It might already be gone. 
+      Want something made just for you? Let's talk.
+    </p>
+
+    <div class="cards reveal reveal-delay-3">
+      <div class="card" style="--card-grad: linear-gradient(135deg,rgba(233,30,140,0.2),transparent);">
+        <span class="card-emoji">🌀</span>
+        <div class="card-title">Spiral Tees</div>
+        <div class="card-desc">Classic tie-dye spirals in any color combo you want. Bold, psychedelic, unforgettable.</div>
+      </div>
+      <div class="card" style="--card-grad: linear-gradient(135deg,rgba(0,188,212,0.2),transparent);">
+        <span class="card-emoji">🌈</span>
+        <div class="card-title">Rainbow Pieces</div>
+        <div class="card-desc">Full spectrum, every color of the rainbow flowing through soft cotton. Wear the whole sky.</div>
+      </div>
+      <div class="card" style="--card-grad: linear-gradient(135deg,rgba(255,107,0,0.2),transparent);">
+        <span class="card-emoji">⚡</span>
+        <div class="card-title">Lightning & Ice</div>
+        <div class="card-desc">Bold contrast patterns — electric bolts through ice-blue and white. For those who like edge.</div>
+      </div>
+      <div class="card" style="--card-grad: linear-gradient(135deg,rgba(156,39,176,0.2),transparent);">
+        <span class="card-emoji">🎪</span>
+        <div class="card-title">Festival Gear</div>
+        <div class="card-desc">Made for the ones who live on the dancefloor. Set yourself apart in full color from head to toe.</div>
+      </div>
+    </div>
+
+    <div class="reveal reveal-delay-4" style="margin-top: 2.5rem;">
+      <a href="https://www.facebook.com/profile.php?id=100063558680382" target="_blank" class="cta-btn">
+        🎨 See Latest Creations on Facebook
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wg2" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#9c27b0"/>
+        <stop offset="25%" stop-color="#2979ff"/>
+        <stop offset="50%" stop-color="#00c851"/>
+        <stop offset="75%" stop-color="#ffd600"/>
+        <stop offset="100%" stop-color="#ff2d55"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,50 C240,110 480,0 720,60 C960,120 1200,10 1440,55 L1440,120 L0,120 Z" fill="url(#wg2)" opacity="0.25"/>
+  </svg>
+</div>
+
+<!-- ══════════════════════════════════════ PROCESS -->
+<section class="section sec-process" id="process">
+  <div class="liquid"></div>
+
+  <div class="section-inner">
+    <span class="section-tag reveal">✦ How It Works</span>
+    <h2 class="section-title grad-green reveal reveal-delay-1">
+      From white shirt<br>to work of art
+    </h2>
+    <p class="section-body reveal reveal-delay-2">
+      Every piece goes through a hands-on, labor-of-love process. Here's how your 
+      custom creation comes to life.
+    </p>
+
+    <div class="steps">
+      <div class="step reveal reveal-delay-1">
+        <div class="step-num">1</div>
+        <div class="step-title">You Reach Out</div>
+        <div class="step-desc">Message me on Facebook or call/text with your idea. Tell me colors, size, style.</div>
+      </div>
+      <div class="step reveal reveal-delay-2">
+        <div class="step-num">2</div>
+        <div class="step-title">We Design</div>
+        <div class="step-desc">I figure out the best pattern and color layout to bring your vision to life.</div>
+      </div>
+      <div class="step reveal reveal-delay-3">
+        <div class="step-num">3</div>
+        <div class="step-title">Hand-Dyed</div>
+        <div class="step-desc">Every piece is folded, tied, and dyed by hand. This is where the magic happens.</div>
+      </div>
+      <div class="step reveal reveal-delay-4">
+        <div class="step-num">4</div>
+        <div class="step-title">It's Yours</div>
+        <div class="step-desc">Reveal, rinse, dry — and your one-of-a-kind piece is ready to pick up or ship!</div>
+      </div>
+    </div>
+
+    <div class="reveal" style="margin-top: 3rem;">
+      <p class="section-body" style="font-size: 0.95rem; color: rgba(255,255,255,0.5);">
+        I accept CashApp · PayPal · Venmo · Apple Pay · and more
+      </p>
+      <div class="payment-row">
+        <span class="pay-pill">💸 CashApp</span>
+        <span class="pay-pill">🅿️ PayPal</span>
+        <span class="pay-pill">💜 Venmo</span>
+        <span class="pay-pill">🍎 Apple Pay</span>
+        <span class="pay-pill">✦ & More</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WAVE DIVIDER -->
+<div class="wave-divider">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="wg3" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" stop-color="#00c851"/>
+        <stop offset="33%" stop-color="#ffd600"/>
+        <stop offset="66%" stop-color="#ff6b00"/>
+        <stop offset="100%" stop-color="#ff2d55"/>
+      </linearGradient>
+    </defs>
+    <path d="M0,30 C360,100 720,0 1080,70 C1260,105 1380,20 1440,45 L1440,120 L0,120 Z" fill="url(#wg3)" opacity="0.2"/>
+  </svg>
+</div>
+
+<!-- ══════════════════════════════════════ ORDER / CONTACT -->
+<section class="section sec-order" id="order">
+  <div class="liquid"></div>
+
+  <div class="section-inner">
+    <span class="section-tag reveal">✦ Get Yours</span>
+    <h2 class="section-title grad-gold reveal reveal-delay-1">
+      Ready to<br>get colorful?
+    </h2>
+    <p class="section-body reveal reveal-delay-2">
+      Hit me up any way you like. I'm always open, always happy to talk shop, 
+      and always ready to make something spectacular just for you.
+    </p>
+
+    <div class="contact-grid reveal reveal-delay-3">
+      <a href="https://www.facebook.com/profile.php?id=100063558680382" target="_blank" class="contact-pill">
+        <span class="icon" style="background: linear-gradient(135deg, #1877f2, #0d5bd9);">📘</span>
+        Facebook
+      </a>
+      <a href="https://www.instagram.com/Preparetodye00" target="_blank" class="contact-pill">
+        <span class="icon" style="background: linear-gradient(135deg, #e91e8c, #9c27b0);">📸</span>
+        @Preparetodye00
+      </a>
+      <a href="tel:9717575287" class="contact-pill">
+        <span class="icon" style="background: linear-gradient(135deg, #00c851, #00bcd4);">📞</span>
+        (971) 757-5287
+      </a>
+      <a href="sms:9717575287" class="contact-pill">
+        <span class="icon" style="background: linear-gradient(135deg, #ff6b00, #ffd600);">💬</span>
+        Text Me
+      </a>
+    </div>
+
+    <div class="reveal reveal-delay-4" style="margin-top: 2.5rem;">
+      <p style="font-size: 0.8rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: 0.5rem;">📍 Rainier, Oregon · Always Open</p>
+      <a href="https://www.facebook.com/profile.php?id=100063558680382" target="_blank" class="cta-btn">
+        Order Something Custom 🌈
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════ FOOTER -->
+<footer>
+  <div class="foot-logo">Prepare To Dye</div>
+  <p>Tie-Dye & Custom Crafts · Rainier, Oregon · Always Open</p>
+  <p style="margin-top:0.5rem;">@Preparetodye00 · (971) 757-5287</p>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const cursorRing = document.getElementById('cursorRing');
+  let mx = -100, my = -100, rx = -100, ry = -100;
+  
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  
+  function animRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    cursorRing.style.left = rx + 'px';
+    cursorRing.style.top = ry + 'px';
+    requestAnimationFrame(animRing);
+  }
+  animRing();
+
+  document.querySelectorAll('a, button, .card, .step').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(2)';
+      cursorRing.style.width = '70px';
+      cursorRing.style.height = '70px';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'translate(-50%,-50%) scale(1)';
+      cursorRing.style.width = '48px';
+      cursorRing.style.height = '48px';
+    });
+  });
+
+  // Nav on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const revealObs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(el => revealObs.observe(el));
+
+  // Scroll-driven hue shift on hero
+  window.addEventListener('scroll', () => {
+    const progress = window.scrollY / (document.body.scrollHeight - window.innerHeight);
+    document.querySelector('.hero-bg').style.filter = 
+      `blur(30px) saturate(1.5) hue-rotate(${progress * 180}deg)`;
+  });
+
+  // Touch: hide cursor on mobile
+  if ('ontouchstart' in window) {
+    cursor.style.display = 'none';
+    cursorRing.style.display = 'none';
+    document.body.style.cursor = 'auto';
+  }
+</script>
+</body>
+</html>
