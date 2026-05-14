@@ -1,0 +1,32 @@
+[
+  {
+    "id": "test-001",
+    "name": "Blue Spiral Tee \u2014 Medium",
+    "description": "Bold ocean-blue spiral on a soft cotton tee. Hand-dyed \u2014 no two alike.",
+    "price": 32.0,
+    "stock": 4,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Tye_dye_2.jpg/640px-Tye_dye_2.jpg",
+    "active": true,
+    "created": "2026-05-14T10:00:00"
+  },
+  {
+    "id": "test-002",
+    "name": "Sunset Ombre Hoodie \u2014 Large",
+    "description": "Warm amber-to-deep-red dip dye on a heavyweight hoodie. Cozy and unique.",
+    "price": 55.0,
+    "stock": 2,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Tye_dye_2.jpg/640px-Tye_dye_2.jpg",
+    "active": true,
+    "created": "2026-05-14T10:05:00"
+  },
+  {
+    "id": "test-003",
+    "name": "Rainbow Crinkle Tee \u2014 Small",
+    "description": "All-over rainbow crinkle pattern \u2014 festival-ready and fully hand-dyed.",
+    "price": 28.0,
+    "stock": 0,
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/Tye_dye_2.jpg/640px-Tye_dye_2.jpg",
+    "active": true,
+    "created": "2026-05-14T10:10:00"
+  }
+]
